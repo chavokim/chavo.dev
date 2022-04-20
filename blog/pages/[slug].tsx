@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import {serialize} from "next-mdx-remote/serialize";
 import {MDXRemote, MDXRemoteSerializeResult} from "next-mdx-remote";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { PrismAsync as SyntaxHighlighter } from "react-syntax-highlighter";
 import {FrontMatterType} from "../common/interfaces/post";
 import React from "react";
 import moment from "moment";
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug }}) => {
 
     const mdxSource = await serialize(content, {
         mdxOptions: {
-            remarkPlugins: [remarkGfm]
+            remarkPlugins: [remarkGfm, require('remark-prism'),]
         },
     });
 

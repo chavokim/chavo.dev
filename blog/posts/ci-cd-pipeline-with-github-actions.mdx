@@ -38,27 +38,26 @@ Github에서 제공한 [tutorial](https://docs.github.com/en/actions/quickstart)
 2. 해당 directory에 `원하는_이름.yml`이라는 이름의 파일을 생성한다.(GA는 `.yml` 파일에서 작동한다.)
 3. 아래와 같은 코드를 해당 파일에 작성한다.
 
-<SyntaxHighlighter language="yaml">
-{`name: GitHub Actions Demo # github actions 이름
+```yaml
+name: GitHub Actions Demo # github actions 이름
 on: [push] # 언제 Github Actions를 수행할 것인지
 jobs: # 수행할 job들
   Explore-GitHub-Actions: # job의 이름
     runs-on: ubuntu-latest # 어느 플랫폼 위에서 수행할 것인가?
     steps: # job 내부에서 수행할 step들
     # github 내부의 환경변수로 GA 정보를 확인할 수 있음. ex) github.event_name
-      - run: echo "🎉 The job was automatically triggered by a \${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a \${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is \${{ github.ref }} and your repository is \${{ github.repository }}."
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: echo "💡 The \${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          ls \${{ github.workspace }}
-      - run: echo "🍏 This job's status is \${{ job.status }}."
-`}
-</SyntaxHighlighter>
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+```
 4. 아무 branch에 push를 하면 GA가 수행된다.
 5. repository의 `nav-bar`에서 `Actions`를 누르면 Actions의 수행 상황을 확인할 수 있다.
 
@@ -75,8 +74,8 @@ jobs: # 수행할 job들
 
 예를 들어 Django의 repository에 CI pipeline을 구현하려고 한다면 `ci/django.yml`을 보면 된다.
 
-<SyntaxHighlighter language="yaml">
-{`name: Django CI
+```yaml
+name: Django CI
 
 on:
   push:
@@ -95,10 +94,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python \${{matrix.python - version}}
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
-        python-version: \${{matrix.python - version}}
+        python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -106,6 +105,5 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
-`}
-</SyntaxHighlighter>
+```
 
