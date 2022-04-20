@@ -29,7 +29,7 @@ const PostCard:React.FC<PostCardProps> = ({post}) => {
                     <p className="text-base text-gray-500 font-normal mb-2">
                         {moment(post.frontMatter.date).format("ll")}
                     </p>
-                    <Link href={post.slug} passHref key={index}>
+                    <Link href={post.slug} passHref>
                         <button className="text-black text-3xl text-left
                         font-bold hover:text-red transition-all ease-in-out
                         duration-200 mb-3">
@@ -39,7 +39,7 @@ const PostCard:React.FC<PostCardProps> = ({post}) => {
                     <p className="break-word text-base text-gray-500 font-light mb-2">
                         {post.frontMatter.excerpt}
                     </p>
-                    <Link href={post.slug} passHref key={index}>
+                    <Link href={post.slug} passHref>
                         <a className="text-base text-gray-500 font-normal
                         hover:text-red transition-all ease-in-out
                         duration-200">
