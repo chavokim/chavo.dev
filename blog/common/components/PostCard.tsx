@@ -6,7 +6,6 @@ import moment from "moment";
 
 interface PostCardProps {
     post: PostType,
-    index: number,
 }
 
 const PostCard:React.FC<PostCardProps> = ({post}) => {
