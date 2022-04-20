@@ -4,7 +4,6 @@ import path from "path";
 import matter from "gray-matter";
 import {serialize} from "next-mdx-remote/serialize";
 import {MDXRemote, MDXRemoteSerializeResult} from "next-mdx-remote";
-import { PrismAsync as SyntaxHighlighter } from "react-syntax-highlighter";
 import {FrontMatterType} from "../common/interfaces/post";
 import React from "react";
 import moment from "moment";
@@ -34,7 +33,7 @@ const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image
                         />
                     </div>
                 </div>
-                <MDXRemote {...mdxSource} components={{ SyntaxHighlighter, Image }} />
+                <MDXRemote {...mdxSource} components={{ Image }} />
             </article>
         </div>
     )
