@@ -1,17 +1,72 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import type {GetStaticProps, NextPage} from 'next'
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import Link from 'next/link';
+import Image from "next/image";
+import {FrontMatterType} from "../interfaces/post";
 
-const Home: NextPage = ({ }) => {
+interface PostType {
+    frontMatter: FrontMatterType,
+    slug: string,
+}
+
+interface HomeTypeProps {
+    posts: PostType[]
+}
+
+const Home: NextPage<HomeTypeProps> = ({ posts }) => {
   return (
     <div>
-
+        {posts.map((post, index) => (
+            <Link href={post.slug} passHref key={index}>
+                <div className="card mb-3 pointer" style={{ maxWidth: '540px' }}>
+                    <div className="row g-0">
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <h5 className="card-title">{post.frontMatter.title}</h5>
+                                <p className="card-text">{post.frontMatter.description}</p>
+                                <p className="card-text">
+                                    <small className="text-muted">{post.frontMatter.date}</small>
+                                </p>
+                            </div>
+                        </div>
+                        <div className="col-md-4 m-auto">
+                            <Image
+                                src={post.frontMatter.thumbnailUrl}
+                                className="img-fluid mt-1 rounded-start"
+                                alt="thumbnail"
+                                width={500}
+                                height={400}
+                                objectFit="cover"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </Link>
+        ))}
     </div>
   )
 }
 
 export default Home
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const files = fs.readdirSync(path.join("posts"));
 
+  const posts = files.map(filename => {
+      const markdownWithMeta = fs.readFileSync(path.join("posts", filename), "utf-8")
+      const {data: frontMatter} = matter(markdownWithMeta);
+
+      return ({
+          frontMatter,
+          slug: filename.split(".")[0]
+      })
+  });
+
+  return ({
+      props: {
+          posts
+      }
+  })
 }

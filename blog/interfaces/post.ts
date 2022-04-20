@@ -1,0 +1,1 @@
+export type FrontMatterType = { [key: string]: any }
