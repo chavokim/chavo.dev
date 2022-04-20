@@ -73,7 +73,7 @@ const Nav: React.FC = () => {
                                 }}
                                 onClick={() => router.push("/")}
                             />
-                            <div className="flex flex-row">
+                            <div className="flex-row hidden sm:flex">
                             {
                                 TAB_ITEMS.map(tabItem => (
                                     <a

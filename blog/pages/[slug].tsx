@@ -17,8 +17,8 @@ interface PostPageTypeProps {
 
 const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image}, mdxSource}) => {
     return (
-        <div className="flex flex-row justify-center overflow-hidden px-4 sm:px-0">
-            <article className={"prose"}>
+        <div className="flex flex-row justify-center px-4 sm:px-0">
+            <article className={"prose overflow-hidden"}>
                 <div className="flex flex-col items-center">
                     <h1>{title}</h1>
                     <p className="m-0 font-normal text-gray-500 mb-12">
