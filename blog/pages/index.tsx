@@ -2,14 +2,9 @@ import type {GetStaticProps, NextPage} from 'next'
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import Link from 'next/link';
-import Image from "next/image";
-import {FrontMatterType} from "../common/interfaces/post";
-
-interface PostType {
-    frontMatter: FrontMatterType,
-    slug: string,
-}
+import {PostType} from "../common/interfaces/post";
+import PostCard from "../common/components/PostCard";
+import moment from "moment";
 
 interface HomeTypeProps {
     posts: PostType[]
@@ -17,34 +12,12 @@ interface HomeTypeProps {
 
 const Home: NextPage<HomeTypeProps> = ({ posts }) => {
   return (
-    <div>
+    <div className="flex flex-row justify-center">
+        <div className="grow-0 shrink-0 basis-10/12 flex flex-wrap flex-row">
         {posts.map((post, index) => (
-            <Link href={post.slug} passHref key={index}>
-                <div className="card mb-3 pointer" style={{ maxWidth: '540px' }}>
-                    <div className="row g-0">
-                        <div className="col-md-8">
-                            <div className="card-body">
-                                <h5 className="card-title">{post.frontMatter.title}</h5>
-                                <p className="card-text">{post.frontMatter.description}</p>
-                                <p className="card-text">
-                                    <small className="text-muted">{post.frontMatter.date}</small>
-                                </p>
-                            </div>
-                        </div>
-                        <div className="col-md-4 m-auto">
-                            <Image
-                                src={post.frontMatter.thumbnailUrl}
-                                className="img-fluid mt-1 rounded-start"
-                                alt="thumbnail"
-                                width={500}
-                                height={400}
-                                objectFit="cover"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </Link>
+            <PostCard post={post} index={index} />
         ))}
+        </div>
     </div>
   )
 }
@@ -64,9 +37,16 @@ export const getStaticProps: GetStaticProps = async () => {
       })
   });
 
+  const compareDate = (l:PostType, r:PostType):number => {
+      const leftDate = moment(l.frontMatter.date);
+      const rightDate = moment(r.frontMatter.date);
+
+      return leftDate.isAfter(rightDate) ? -1 : 1;
+  }
+
   return ({
       props: {
-          posts
+          posts: posts.sort(compareDate),
       }
   })
 }

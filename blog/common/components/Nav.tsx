@@ -17,6 +17,7 @@ const Nav: React.FC = () => {
 
         const mockNavEl = document.querySelector(".mock-appbar");
         const navEl = document.querySelector("header");
+        const imageEl = document.querySelector(".logo-image");
 
         ScrollTrigger.create({
             start: `top -96px`,
@@ -25,10 +26,13 @@ const Nav: React.FC = () => {
             onEnterBack: () => {
                 navEl?.classList.remove("shadow-2xl");
                 navEl?.classList.add("pt-8", "pb-4");
+                imageEl?.setAttribute("src", "/logo_typo_animation.gif");
+
             },
             onLeave: () => {
                 navEl?.classList.add("shadow-2xl");
                 navEl?.classList.remove("pt-8", "pb-4");
+                imageEl?.setAttribute("src", "/logo_typo.svg");
             },
         })
     }, [])
@@ -47,19 +51,20 @@ const Nav: React.FC = () => {
                 className={"mock-appbar"}
                 style={{
                     width: "100%",
-                    height: 98,
+                    height: 108,
                 }}
             />
             <header className="top-0 left-0 right-0 bg-red z-50
              w-screen fixed pt-8 pb-4 ease-in-out transition-all">
                 <div className="container mx-auto px-4">
                     <nav className="flex flex-row justify-between">
-                        <Image
-                            className="cursor-pointer hover:opacity-70"
+                        <img
+                            className="cursor-pointer hover:opacity-70 logo-image"
                             src="/logo_typo_animation.gif"
-                            height={50}
-                            width={157}
-                            layout={"fixed"}
+                            style={{
+                                height: 50,
+                                width: "auto",
+                            }}
                             onClick={() => router.push("/")}
                         />
                         <div className="flex flex-row">

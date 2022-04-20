@@ -1,0 +1,111 @@
+---
+title: Github Actions로 만나는 CI/CD
+date: "2021-09-22"
+image: '/ci-cd-pipeline-with-github-actions/CI-CD.png'
+imageAlt: Workflow in CI/CD
+excerpt: CI/CD에 대한 설명과 이를 Github Action으로 어떻게 구현하는지 알아봅니다.
+---
+
+# CI/CD가 무엇인가?
+CI/CD는 (1)`Continuous Integration`과 (2)`Continuos Deployment/Delivery`의 약어로
+(1) 새롭게 짠 코드를 기존의 코드와 합칠 때, `오류없이` (2) 실제 Production level까지 배포되는 과정을 `자동화`하는 것을 뜻한다.
+새롭게 짠 코드가 기존의 코드와 충돌없이 합쳐지는지 확인하기 위해 새로운 코드를 `Build`해보고, 로직이 제대로 작동하는지 `Test`하고,
+기존의 Commit들과 충돌없이 `Merge`하는지 체크한다.
+이 과정이 오류없이 진행된다면 새롭게 짠 코드와 기존의 코드가 합쳐진채로 Main Repository에 `Release`되고,
+실제 Production으로 `Deploy`된다.
+
+# CI/CD를 위해 어떤 프로그램이 이용되나?
+광범위하게 쓰이는 것으로는 `Github Actions`, `Jenkins`, `Circle CI`가 있다.
+
+먼저 `Jenkins`와 `Github Actions`를 비교하면 [다음 글](https://blog.bitsrc.io/github-actions-or-jenkins-making-the-right-choice-for-you-9ac774684c8)에서 잘 확인할 수 있는데,
+압도적으로 Github Actions의 장점이 더 많은 것을 알 수 있다.*(별도의 Server가 필요없고, Async한 CI/CD가 가능하고, 어느 환경애서나 수행 가능)*
+
+`Circle CI`와 `Github Actions`를 [비교한 글](https://www.devopsauthority.tech/2021/02/08/github-actions-vs-circleci-comparing-ci-cd-platforms/)에서는 장단점이 반반 드러나는데,
+Circle CI가 Github Actions에 비해 먼저 나왔기 때문에 지원하는 기능이 더 많고, GPU로 돌아가는 build 옵션을 제공해준다.
+하지만 Github Actions는 repository에서의 코드 관리와 CI/CD pipeline을 하나의 인터페이스에서 확인할 수 있는 장점이 있고,
+무료 플랜도 Circle CI에 비해 두 배정도 더 많은 시간을 제공하기 때문에 메리트가 있다.
+
+1. Build 과정이 GPU를 돌릴 정도로 뛰어난 연산 과정이 필요하지 않고,
+2. 소스 코드 관리와 CI/CD 프로세스를 하나의 인터페이스에서 확인 가능
+
+한 점으로 `Github Actions`를 CI/CD 프로그램으로 선택하였다.
+
+# Github Actions(GA)로 CI/CD pipeline을 어떻게 구현하나?
+
+Github에서 제공한 [tutorial](https://docs.github.com/en/actions/quickstart)을 토대로 설명하겠다.
+
+1. 먼저 repository에 `.github/workflows`라는 directory를 생성한다.
+2. 해당 directory에 `원하는_이름.yml`이라는 이름의 파일을 생성한다.(GA는 `.yml` 파일에서 작동한다.)
+3. 아래와 같은 코드를 해당 파일에 작성한다.
+
+<SyntaxHighlighter language="yaml">
+{`name: GitHub Actions Demo # github actions 이름
+on: [push] # 언제 Github Actions를 수행할 것인지
+jobs: # 수행할 job들
+  Explore-GitHub-Actions: # job의 이름
+    runs-on: ubuntu-latest # 어느 플랫폼 위에서 수행할 것인가?
+    steps: # job 내부에서 수행할 step들
+    # github 내부의 환경변수로 GA 정보를 확인할 수 있음. ex) github.event_name
+      - run: echo "🎉 The job was automatically triggered by a \${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a \${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is \${{ github.ref }} and your repository is \${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "💡 The \${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls \${{ github.workspace }}
+      - run: echo "🍏 This job's status is \${{ job.status }}."
+`}
+</SyntaxHighlighter>
+4. 아무 branch에 push를 하면 GA가 수행된다.
+5. repository의 `nav-bar`에서 `Actions`를 누르면 Actions의 수행 상황을 확인할 수 있다.
+
+<div className="mx-auto" style={{maxWidth: 1000}}>
+    <Image
+        layout="responsive"
+        src={"/ci-cd-pipeline-with-github-actions/actions-tab.png"}
+        width={1000}
+        height={104}
+    />
+</div>
+
+본인의 repository에 어떻게 적용해야할지 모르는 사람들을 위해 [stater](https://github.com/actions/starter-workflows)를 제공한다.
+
+예를 들어 Django의 repository에 CI pipeline을 구현하려고 한다면 `ci/django.yml`을 보면 된다.
+
+<SyntaxHighlighter language="yaml">
+{`name: Django CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python \${{matrix.python - version}}
+      uses: actions/setup-python@v2
+      with:
+        python-version: \${{matrix.python - version}}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        python manage.py test
+`}
+</SyntaxHighlighter>
+

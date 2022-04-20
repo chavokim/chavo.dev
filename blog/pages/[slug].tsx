@@ -8,28 +8,35 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import {FrontMatterType} from "../common/interfaces/post";
 import {MDXRemoteSerializeResult} from "next-mdx-remote/dist/types";
 import React from "react";
-
-const Button: React.FC<{ text: string }> = ({ text }) => {
-    return (
-        <button
-            className="btn btn-primary"
-            onClick={event => event.target.innerText = 'You clicked me!'}
-        >
-            {text}
-        </button>
-    )
-}
+import moment from "moment";
+import Image from "next/image";
+import remarkGfm from "remark-gfm";
 
 interface PostPageTypeProps {
     frontMatter: FrontMatterType,
     mdxSource: MDXRemoteSerializeResult
 }
 
-const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title}, mdxSource}) => {
+const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image}, mdxSource}) => {
     return (
-        <div className="mt-4">
-            <h1>{title}</h1>
-            <MDXRemote {...mdxSource} components={{ SyntaxHighlighter, Button }} />
+        <div className="flex flex-row justify-center">
+            <article className={"prose"}>
+                <div className="flex flex-col items-center">
+                    <h1>{title}</h1>
+                    <p className="m-0 font-normal text-gray-500 mb-12">
+                        {moment(date).format("ll")}
+                    </p>
+                    <div className="w-full aspect-video relative rounded-lg overflow-hidden">
+                        <Image
+                            src={image}
+                            alt="thumbnail"
+                            layout={"fill"}
+                            objectFit="cover"
+                        />
+                    </div>
+                </div>
+                <MDXRemote {...mdxSource} components={{ SyntaxHighlighter, Image }} />
+            </article>
         </div>
     )
 }
@@ -54,7 +61,11 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug }}) => {
 
     const {data: frontMatter, content} = matter(markdownWithMeta);
 
-    const mdxSource = await serialize(content);
+    const mdxSource = await serialize(content, {
+        mdxOptions: {
+            remarkPlugins: [remarkGfm]
+        },
+    });
 
     return ({
         props: {
