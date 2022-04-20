@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import {serialize} from "next-mdx-remote/serialize";
 import {MDXRemote} from "next-mdx-remote";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import {FrontMatterType} from "../interfaces/post";
+import {FrontMatterType} from "../common/interfaces/post";
 import {MDXRemoteSerializeResult} from "next-mdx-remote/dist/types";
 import React from "react";
 

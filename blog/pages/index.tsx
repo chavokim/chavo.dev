@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import Link from 'next/link';
 import Image from "next/image";
-import {FrontMatterType} from "../interfaces/post";
+import {FrontMatterType} from "../common/interfaces/post";
 
 interface PostType {
     frontMatter: FrontMatterType,
