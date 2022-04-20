@@ -54,7 +54,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: { slug }}) => {
+export const getStaticProps: GetStaticProps = async (context) => {
+    const slug = context.params?.slug;
+
     const markdownWithMeta = fs.readFileSync(path.join("posts", slug + ".mdx"), "utf-8");
 
     const {data: frontMatter, content} = matter(markdownWithMeta);
