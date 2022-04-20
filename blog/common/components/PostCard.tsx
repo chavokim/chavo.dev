@@ -9,11 +9,11 @@ interface PostCardProps {
     index: number,
 }
 
-const PostCard:React.FC<PostCardProps> = ({post, index}) => {
+const PostCard:React.FC<PostCardProps> = ({post}) => {
     return (
         <div className="px-4 break-word basis-full lg:basis-6/12">
             <article className="mb-16 flex flex-col">
-                <Link href={post.slug} passHref key={index}>
+                <Link href={post.slug} passHref>
                     <div
                         className="overflow-hidden rounded-xl flex mb-4 relative aspect-video cursor-pointer"
                     >

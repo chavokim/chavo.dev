@@ -15,7 +15,7 @@ const Home: NextPage<HomeTypeProps> = ({ posts }) => {
     <div className="flex flex-row justify-center">
         <div className="grow-0 shrink-0 basis-10/12 flex flex-wrap flex-row">
         {posts.map((post, index) => (
-            <PostCard post={post} index={index} />
+            <PostCard post={post} }k />
         ))}
         </div>
     </div>
