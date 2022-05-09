@@ -35,8 +35,8 @@ const Nav: React.FC = () => {
             },
         });
 
-        gsap.to('progress', {
-            value: 100,
+        gsap.to('.progress-bar', {
+            width: "100%",
             ease: 'none',
             scrollTrigger: { scrub: 0.3 }
         });
@@ -91,14 +91,17 @@ const Nav: React.FC = () => {
                         </nav>
                     </div>
                 </header>
-                <progress
-                    className="w-screen h-1"
-                    max={100}
-                    value={0}
-                    style={{
-                        background: "linear-gradient(to right, #8e0e00, #1f1c18)",
-                    }}
-                />
+                <div
+                    className="w-screen h-1 appearance-none bg-transparent progress-wrapper"
+                >
+                    <div
+                        className="bg-black progress-bar h-full w-0"
+                        style={{
+                            backgroundImage: "linear-gradient(to right, #ff8177 0%, #ff867a 0%," +
+                                " #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%)"
+                        }}
+                    />
+                </div>
             </div>
         </>
     )
