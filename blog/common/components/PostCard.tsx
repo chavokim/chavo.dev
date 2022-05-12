@@ -26,22 +26,22 @@ const PostCard:React.FC<PostCardProps> = ({post}) => {
                     </div>
                 </Link>
                 <div className="card-body">
-                    <p className="text-base text-gray-500 font-normal mb-2">
+                    <p className="text-base text-gray-500 font-normal mb-2 dark:text-gray-400">
                         {moment(post.frontMatter.date).format("ll")}
                     </p>
                     <Link href={post.slug} passHref>
-                        <button className="text-black text-3xl text-left
-                        font-bold hover:text-red transition-all ease-in-out
+                        <button className="text-black dark:text-gray-200 text-3xl text-left
+                        font-bold hover:text-red dark:hover:text-red transition-all ease-in-out
                         duration-200 mb-3">
                             {post.frontMatter.title}
                         </button>
                     </Link>
-                    <p className="break-word text-base text-gray-500 font-light mb-2">
+                    <p className="break-word text-base text-gray-500 font-light mb-2 dark:text-gray-400">
                         {post.frontMatter.excerpt}
                     </p>
                     <Link href={post.slug} passHref>
                         <a className="text-base text-gray-500 font-normal
-                        hover:text-red transition-all ease-in-out
+                        hover:text-red transition-all ease-in-out dark:text-gray-400
                         duration-200">
                             읽으러 가기 →
                         </a>

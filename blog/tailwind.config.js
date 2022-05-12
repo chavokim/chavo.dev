@@ -1,11 +1,12 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  content: [
+    darkMode: 'class',
+    content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./common/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
+    ],
+    theme: {
     extend: {
       colors: {
           red: "#D50606",
@@ -16,8 +17,8 @@ module.exports = {
         mono: ["Roboto Mono", ...defaultTheme.fontFamily.mono],
       }
     },
-  },
-  plugins: [
+    },
+    plugins: [
       require("@tailwindcss/typography"),
-  ],
+    ],
 }
