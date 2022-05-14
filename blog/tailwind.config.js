@@ -8,14 +8,16 @@ module.exports = {
     ],
     theme: {
     extend: {
-      colors: {
+        colors: {
           red: "#D50606",
           white: "#F2F2F2",
           black: "#1A1A1A",
-      },
-      fontFamily: {
-        mono: ["Roboto Mono", ...defaultTheme.fontFamily.mono],
-      }
+          pureBlack: "#000000",
+          pureWhite: "#FFFFFF",
+        },
+        fontFamily: {
+            mono: ["Roboto Mono", ...defaultTheme.fontFamily.mono],
+        },
     },
     },
     plugins: [

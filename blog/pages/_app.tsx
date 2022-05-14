@@ -24,24 +24,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                 href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
             />
         </Head>
-        <Script
-                
-            src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-            charSet="utf-8"
-        />
-        <Script
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-                __html: `
-                var popoverTriggerList = [].slice.call(
-                document.querySelectorAll('[data-bs-toggle="popover"]')
-                );
-                var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-                    return new Popover(popoverTriggerEl);
-                });
-                `,
-            }}
-        />
         <Nav />
         <section className="py-24 width-screen dark:bg-black">
             <div className="container mx-auto">

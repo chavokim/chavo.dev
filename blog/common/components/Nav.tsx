@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useRef, useState} from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import useIsomorphicLayoutEffect from "../utils/useIsomorphicLayoutEffect"
@@ -6,6 +6,8 @@ import {useRouter} from "next/router";
 import LightIcon from "../../public/icons/light_icon.svg"
 import DarkIcon from "../../public/icons/dark_icon.svg"
 import SystemIcon from "../../public/icons/system_icon.svg"
+import LogoIcon from "../../public/logo_typo.svg"
+import {createPopper} from "@popperjs/core";
 
 const TAB_ITEMS = [
     {label: "Dev", href: "/?activeName=dev", value: "dev",},
@@ -29,13 +31,40 @@ const Nav: React.FC = () => {
     const [displayTheme, setDisplayTheme] = useState("");
 
     const [popUpOpen, setPopUpOpen] = useState(false);
+    const btnRef = useRef<HTMLButtonElement>(null);
+    const popoverRef = useRef<HTMLDivElement>(null);
+
+    const handleClick = useCallback((e: MouseEvent) => {
+        if(btnRef.current?.contains(e.target as HTMLElement)) {
+            setPopUpOpen(prev => {
+                if(!prev && btnRef.current && popoverRef.current) {
+                    createPopper(btnRef.current, popoverRef.current, {
+                        placement: "bottom",
+                        modifiers: [
+                            {
+                                name: "offset",
+                                options: {
+                                    offset: [10, 20],
+                                }
+                            }
+                        ],
+                    });
+                }
+
+                return !prev;
+            });
+        } else {
+            setPopUpOpen(false);
+        }
+    }, []);
 
     useIsomorphicLayoutEffect(() => {
+        document.addEventListener("click", handleClick);
+
         gsap.registerPlugin(ScrollTrigger);
 
         const mockNavEl = document.querySelector(".mock-appbar");
         const navEl = document.querySelector("header");
-        const imageEl = document.querySelector(".logo-image");
 
         ScrollTrigger.create({
             start: `top -96px`,
@@ -44,13 +73,11 @@ const Nav: React.FC = () => {
             onEnterBack: () => {
                 navEl?.classList.remove("shadow-2xl");
                 navEl?.classList.add("pt-8", "pb-4");
-                imageEl?.setAttribute("src", "/logo_typo_animation.gif");
 
             },
             onLeave: () => {
                 navEl?.classList.add("shadow-2xl");
                 navEl?.classList.remove("pt-8", "pb-4");
-                imageEl?.setAttribute("src", "/logo_typo.svg");
             },
         });
 
@@ -59,6 +86,15 @@ const Nav: React.FC = () => {
             ease: 'none',
             scrollTrigger: { scrub: 0.3 }
         });
+
+        return () => {
+            const triggers = ScrollTrigger.getAll();
+            triggers.forEach( trigger => {
+                trigger.kill();
+            });
+
+            document.removeEventListener("click", handleClick);
+        }
     }, [])
 
     useIsomorphicLayoutEffect(() => {
@@ -101,31 +137,23 @@ const Nav: React.FC = () => {
         localStorage.theme = newDisplayTheme;
     }
 
-    const togglePopUpOpen = () => {
-        setPopUpOpen(prev => !prev);
-    }
-
     return (
         <>
             <div
-                className={"mock-appbar bg-red"}
+                className={"mock-appbar dark:bg-black"}
                 style={{
                     width: "100%",
                     height: 108,
                 }}
             />
             <div className="top-0 left-0 right-0 fixed z-50 flex flex-col">
-                <header className="bg-red
-                 w-screen pt-8 pb-4 ease-in-out transition-all">
+                <header className="bg-pureWhite w-screen pt-8 pb-4 ease-in-out transition-all dark:bg-black">
                     <div className="container mx-auto px-4">
                         <nav className="flex flex-row justify-between items-center">
-                            <img
-                                className="cursor-pointer hover:opacity-70 logo-image"
-                                src="/logo_typo_animation.gif"
-                                style={{
-                                    height: 50,
-                                    width: "auto",
-                                }}
+                            <LogoIcon
+                                width={157}
+                                height={50}
+                                className="select-none cursor-pointer"
                                 onClick={() => router.push("/")}
                             />
                             <div className="flex flex-row items-center">
@@ -135,8 +163,9 @@ const Nav: React.FC = () => {
                                         <a
                                             key={tabItem.value}
                                             className={
-                                                `p-4 text-lg text-white font-medium 
-                                                hover:text-black ${selected(tabItem.label) ? "text-black" : ""}`
+                                                `p-4 text-lg text-red font-medium 
+                                                ${selected(tabItem.label) ? 
+                                                    "text-black dark:text-white" : ""}`
                                             }
                                             href={tabItem.href}
                                         >
@@ -149,39 +178,36 @@ const Nav: React.FC = () => {
                                     className=" ml-6 pl-6 flex flex-row py-6"
                                 >
                                     <button
-                                        className="fill-slate-800 dark:fill-slate-200"
+                                        className="fill-red"
                                         aria-expanded={popUpOpen}
                                         aria-haspopup={"true"}
-                                        onClick={togglePopUpOpen}
+                                        ref={btnRef}
                                     >
                                         {DisplayThemeTypeToIcon[displayTheme || DisplayThemeType.System]}
                                     </button>
                                 </div>
-                                {
-                                    popUpOpen ? (
-                                        <ul
-                                            className="absolute z-50 top-full right-0 bg-white rounded-lg ring-1
-                                             ring-slate-900/10 shadow-lg overflow-hidden w-36 py-1 text-sm
-                                             text-slate-700 font-semibold dark:bg-slate-800 dark:ring-0
-                                             dark:highlight-white/5 dark:text-slate-300 mt-8"
-                                        >
-                                            {
-                                                Object.values(DisplayThemeType).map(displayTheme => (
-                                                    <li
-                                                        key={displayTheme}
-                                                        className="py-1 px-2 flex items-center cursor-pointer"
-                                                        onClick={() => handleThemeChange(displayTheme)}
-                                                    >
-                                                        <span className="mr-2">
-                                                            {DisplayThemeTypeToIcon[displayTheme]}
-                                                        </span>
-                                                        {displayTheme}
-                                                    </li>
-                                                ))
-                                            }
-                                        </ul>
-                                    ) : null
-                                }
+                                <div
+                                    className={`${popUpOpen ? "" : "invisible"} absolute z-50 top-full right-0 bg-white rounded-lg ring-1
+                                     ring-slate-900/10 shadow-lg overflow-hidden w-36 py-1 text-sm
+                                     text-slate-700 font-semibold dark:bg-slate-800 dark:ring-0
+                                     dark:highlight-white/5 dark:text-slate-300 mt-8`}
+                                    ref={popoverRef}
+                                >
+                                    {
+                                        Object.values(DisplayThemeType).map(displayTheme => (
+                                            <div
+                                                key={displayTheme}
+                                                className="py-1 px-2 flex items-center cursor-pointer"
+                                                onClick={() => handleThemeChange(displayTheme)}
+                                            >
+                                                <span className="mr-2">
+                                                    {DisplayThemeTypeToIcon[displayTheme]}
+                                                </span>
+                                                {displayTheme}
+                                            </div>
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </nav>
                     </div>
