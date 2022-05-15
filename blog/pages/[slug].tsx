@@ -20,7 +20,7 @@ const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image
     return (
         <>
             <Head>
-                <title>Kacey Cleveland - {title}</title>
+                <title>Chavolog - {title}</title>
                 <meta name="description" content={excerpt} />
                 <meta property="og:title" content={title} />
                 <meta property="og:type" content="article" />

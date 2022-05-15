@@ -1,16 +1,19 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from "next/head";
-import Script from "next/script";
 import Nav from "../common/components/Nav";
+import React from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
     <div>
         <Head>
             <title>Chavolog</title>
-            <meta name="description" content="Chavo's blog" />
+            <meta name="description" content="Chavo Kim's blog" />
             <link rel="icon" href="/favicon.ico" />
+            <meta property="og:title" content="Chavolog" />
+            <meta property="og:type" content="article" />
+            <meta property="og:image" content="/og_image.png" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={""} />
             <link
