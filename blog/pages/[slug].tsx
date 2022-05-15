@@ -1,3 +1,4 @@
+import Head from "next/head";
 import {GetStaticPaths, GetStaticProps, NextPage} from "next";
 import fs from "fs";
 import path from "path";
@@ -15,27 +16,36 @@ interface PostPageTypeProps {
     mdxSource: MDXRemoteSerializeResult
 }
 
-const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image}, mdxSource}) => {
+const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image, excerpt}, mdxSource}) => {
     return (
-        <div className="flex flex-row justify-center px-4 sm:px-0">
-            <article className={"prose overflow-hidden dark:prose-invert"}>
-                <div className="flex flex-col items-center">
-                    <h1>{title}</h1>
-                    <p className="m-0 font-normal text-gray-500 mb-12">
-                        {moment(date).format("ll")}
-                    </p>
-                    <div className="w-full aspect-video relative rounded-lg overflow-hidden">
-                        <Image
-                            src={image}
-                            alt="thumbnail"
-                            layout={"fill"}
-                            objectFit="cover"
-                        />
+        <>
+            <Head>
+                <title>Kacey Cleveland - {title}</title>
+                <meta name="description" content={excerpt} />
+                <meta property="og:title" content={title} />
+                <meta property="og:type" content="article" />
+                <meta property="og:image" content={image} />
+            </Head>
+            <div className="flex flex-row justify-center px-4 sm:px-0">
+                <article className={"prose overflow-hidden dark:prose-invert"}>
+                    <div className="flex flex-col items-center">
+                        <h1>{title}</h1>
+                        <p className="m-0 font-normal text-gray-500 mb-12">
+                            {moment(date).format("ll")}
+                        </p>
+                        <div className="w-full aspect-video relative rounded-lg overflow-hidden">
+                            <Image
+                                src={image}
+                                alt="thumbnail"
+                                layout={"fill"}
+                                objectFit="cover"
+                            />
+                        </div>
                     </div>
-                </div>
-                <MDXRemote {...mdxSource} components={{ Image }} />
-            </article>
-        </div>
+                    <MDXRemote {...mdxSource} components={{ Image }} />
+                </article>
+            </div>
+        </>
     )
 }
 
