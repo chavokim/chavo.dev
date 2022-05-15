@@ -27,12 +27,19 @@ const DisplayThemeTypeToIcon = {
     [DisplayThemeType.System]: <SystemIcon width={24} height={24} />,
 }
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Nav: React.FC = () => {
     const [displayTheme, setDisplayTheme] = useState("");
 
     const [popUpOpen, setPopUpOpen] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const popoverRef = useRef<HTMLDivElement>(null);
+
+    const router = useRouter();
+
+    const {query, pathname} = router;
+    const {activeName} = query;
 
     const handleClick = useCallback((e: MouseEvent) => {
         if(btnRef.current?.contains(e.target as HTMLElement)) {
@@ -61,12 +68,10 @@ const Nav: React.FC = () => {
     useIsomorphicLayoutEffect(() => {
         document.addEventListener("click", handleClick);
 
-        gsap.registerPlugin(ScrollTrigger);
-
         const mockNavEl = document.querySelector(".mock-appbar");
         const navEl = document.querySelector("header");
 
-        ScrollTrigger.create({
+        const st = ScrollTrigger.create({
             start: `top -96px`,
             end: "bottom bottom",
             trigger: mockNavEl,
@@ -81,21 +86,28 @@ const Nav: React.FC = () => {
             },
         });
 
-        gsap.to('.progress-bar', {
+        return () => {
+            st.kill();
+            document.removeEventListener("click", handleClick);
+        }
+    }, [])
+
+    useIsomorphicLayoutEffect(() => {
+        const tween = gsap.fromTo('.progress-bar', {
+            width: "0%",
+        }, {
             width: "100%",
             ease: 'none',
             scrollTrigger: { scrub: 0.3 }
         });
+        
+        console.log("make");
 
         return () => {
-            const triggers = ScrollTrigger.getAll();
-            triggers.forEach( trigger => {
-                trigger.kill();
-            });
-
-            document.removeEventListener("click", handleClick);
+            tween.kill();
+            console.log("kill");
         }
-    }, [])
+    }, [pathname])
 
     useIsomorphicLayoutEffect(() => {
         if(!displayTheme) {
@@ -117,10 +129,6 @@ const Nav: React.FC = () => {
             document.documentElement.classList.remove(DisplayThemeType.Dark);
         }
     }, [displayTheme])
-
-    const router = useRouter();
-
-    const {activeName} = router.query;
 
     const selected = (label: string):boolean => {
         return activeName === label.toLowerCase();
