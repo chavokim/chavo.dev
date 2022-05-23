@@ -4,6 +4,7 @@ import Head from "next/head";
 import Nav from "../common/components/Nav";
 import React from "react";
 import Footer from '../common/components/Footer';
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -31,6 +32,19 @@ function MyApp({ Component, pageProps }: AppProps) {
                 as="style"
                 crossOrigin={""}
                 href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+            />
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-1DMF5XVR4Z"/>
+            <Script
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', 'G-1DMF5XVR4Z');
+                `,
+                }}
             />
         </Head>
         <Nav />
