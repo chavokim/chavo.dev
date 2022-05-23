@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
             <title>Chavolog</title>
             <meta name="description" content="Chavo Kim's blog" />
+            <meta name="naver-site-verification" content="ffd2270ebd7d5eaafd28a54e52a4afda91a05e1f" />
             <link rel="icon" href="/favicon.ico" />
             <meta property="og:title" content="Chavolog" />
             <meta property="og:type" content="article" />
