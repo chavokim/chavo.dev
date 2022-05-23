@@ -73,7 +73,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const mdxSource = await serialize(content, {
         mdxOptions: {
-            remarkPlugins: [remarkGfm, require('remark-prism'),]
+            remarkPlugins: [
+                remarkGfm, 
+                require('remark-prism'),
+            ]
         },
     });
 

@@ -2,11 +2,16 @@
     <defs>
         <style>
             .cls-1,.cls-2,.cls-3{
-            fill:none;stroke:#d50606;stroke-linecap:round;stroke-miterlimit:10;}.cls-1{stroke-width:50px;}.cls-2{stroke-width:60px;}.cls-3{stroke-width:80px;}.cls-4{font-size:400px;fill:#d50606;font-family:Futura-Medium,
-            Futura;font-weight:500;}.cls-5{letter-spacing:0.02em;}.cls-6{letter-spacing:-0.06em;}.cls-7{letter-spacing:-0.03em;}
+            fill:none;stroke:#d50606;stroke-linecap:round;stroke-miterlimit:10;}.cls-1{stroke-width:50px;}.cls-2{stroke-width:60px;}.cls-3{stroke-width:80px;}
+            .cls-4{
+                font-size:400px;
+                fill:#d50606;
+                font-family:Futura-Medium,Futura,"Red Hat Text",sans-serif;
+                font-weight:500;
+            }
+            .cls-5{letter-spacing:0.02em;}.cls-6{letter-spacing:-0.06em;}.cls-7{letter-spacing:-0.03em;}
             .cls-2{animation: pulse2 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;}
             .cls-3{animation: pulse2 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; animation-delay: 250ms;}
-
             @keyframes pulse2 {
             0%, 100% {
                     opacity: 1;
