@@ -6,11 +6,12 @@ import moment from "moment";
 
 interface PostCardProps {
     post: PostType,
+    isFirst: boolean,
 }
 
-const PostCard:React.FC<PostCardProps> = ({post}) => {
+const PostCard:React.FC<PostCardProps> = ({post, isFirst}) => {
     return (
-        <div className="px-4 break-word basis-full lg:basis-6/12">
+        <div className={`px-4 break-word basis-full lg:basis-6/12 ${isFirst ? "lg:basis-full" : ""}`}>
             <article className="mb-16 flex flex-col">
                 <Link href={`/blog/${post.slug}`} passHref>
                     <div

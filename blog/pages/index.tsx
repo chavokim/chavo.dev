@@ -18,7 +18,7 @@ const Home: NextPage<HomeTypeProps> = ({ posts, totalPageNum, }) => {
         <div className="flex flex-row justify-center">
             <div className="grow-0 shrink-0 basis-10/12 flex flex-wrap flex-row">
             {posts.map((post, index) => (
-                <PostCard post={post} key={index} />
+                <PostCard post={post} key={index} isFirst={!index} />
             ))}
             </div>
         </div>
