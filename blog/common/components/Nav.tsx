@@ -171,9 +171,9 @@ const Nav: React.FC = () => {
                                         <a
                                             key={tabItem.value}
                                             className={
-                                                `p-4 text-lg text-red font-medium 
+                                                `p-4 text-lg dark:text-white font-medium 
                                                 ${selected(tabItem.label) ? 
-                                                    "text-black dark:text-white" : ""}`
+                                                    "text-red dark:text-red" : ""}`
                                             }
                                             href={tabItem.href}
                                         >
@@ -186,7 +186,7 @@ const Nav: React.FC = () => {
                                     className=" ml-6 pl-6 flex flex-row py-6"
                                 >
                                     <button
-                                        className="fill-red"
+                                        className="fill-black dark:fill-white"
                                         aria-expanded={popUpOpen}
                                         aria-haspopup={"true"}
                                         ref={btnRef}

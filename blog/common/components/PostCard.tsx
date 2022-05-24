@@ -12,7 +12,7 @@ const PostCard:React.FC<PostCardProps> = ({post}) => {
     return (
         <div className="px-4 break-word basis-full lg:basis-6/12">
             <article className="mb-16 flex flex-col">
-                <Link href={post.slug} passHref>
+                <Link href={`/blog/${post.slug}`} passHref>
                     <div
                         className="overflow-hidden rounded-xl flex mb-4 relative aspect-video cursor-pointer"
                     >
@@ -29,7 +29,7 @@ const PostCard:React.FC<PostCardProps> = ({post}) => {
                     <p className="text-base text-gray-500 font-normal mb-2 dark:text-gray-400">
                         {moment(post.frontMatter.date).format("ll")}
                     </p>
-                    <Link href={post.slug} passHref>
+                    <Link href={`/blog/${post.slug}`} passHref>
                         <button className="text-black dark:text-gray-200 text-3xl text-left
                         font-bold hover:text-red dark:hover:text-red transition-all ease-in-out
                         duration-200 mb-3">
@@ -39,7 +39,7 @@ const PostCard:React.FC<PostCardProps> = ({post}) => {
                     <p className="break-word text-base text-gray-500 font-light mb-2 dark:text-gray-400">
                         {post.frontMatter.excerpt}
                     </p>
-                    <Link href={post.slug} passHref>
+                    <Link href={`/blog/${post.slug}`} passHref>
                         <a className="text-base text-gray-500 font-normal
                         hover:text-red transition-all ease-in-out dark:text-gray-400
                         duration-200">
