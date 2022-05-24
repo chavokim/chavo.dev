@@ -33,11 +33,15 @@ function MyApp({ Component, pageProps }: AppProps) {
                 crossOrigin={""}
                 href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
             />
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-1DMF5XVR4Z"/>
         </Head>
         <Script
-            strategy="afterInteractive"
             id="gtag-script"
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=G-1DMF5XVR4Z`}
+        />
+        <Script
+            strategy="afterInteractive"
+            id="gtag-script2"
             dangerouslySetInnerHTML={{
                 __html: `
                 window.dataLayer = window.dataLayer || [];

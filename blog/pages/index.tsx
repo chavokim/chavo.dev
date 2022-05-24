@@ -26,7 +26,7 @@ const Home: NextPage<HomeTypeProps> = ({ posts, totalPageNum, }) => {
             <div className='flex flex-row justify-center items-center space-x-1'>
                 {
                     ([...new Array(totalPageNum)]).map((_, i) => (
-                        <Link passHref href={`/page/${i+1}`}>
+                        <Link passHref href={`/page/${i+1}`} key={`pageitem-${i}`}>
                             <div 
                                 className={`h-12 w-12 flex flex-row justify-center items-center dark:text-white
                                 cursor-pointer hover:bg-red hover:text-white rounded-lg dark:hover:text-black font-bold
