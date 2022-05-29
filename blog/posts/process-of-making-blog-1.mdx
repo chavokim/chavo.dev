@@ -1,0 +1,130 @@
+---
+title: 나의 블로그 생성기 - 1
+date: "2022-05-29"
+image: '/process-of-making-blog-1/process-of-blog.png'
+imageAlt: Network Image
+excerpt: 블로그를 시작한 이유와 현재까지 개발한 과정에 대한 글입니다.
+---
+
+> 나도 블로그 해볼까?
+
+## 기술 블로그?
+
+웹 개발을 하면서 항상 "Why?"와 부딪히게 됩니다. 
+
+내 코드는 잘돌아가(야하)는데 왜 콘솔창에 빨간색 오류들만 뜨며 화면이 뜨지 않을까?  
+튜토리얼을 따라하다보면 패키지 설치하는 과정에서 자꾸 오류가 터지는데 어떻게 해결해야하나?
+
+<div className="mx-auto" style={{maxWidth: 500}}>
+    <Image
+        layout="responsive"
+        src={"/process-of-making-blog-1/console-errors.png"}
+        width={1081}
+        height={554}
+    />
+</div>
+<p style={{textAlign: "center", marginTop: 4,}}>
+    <span>공포의 빨간 Developer Tools...</span>
+</p>
+
+그럴 때마다 갓그레이트엠퍼러마제스티**구글**님의 힘을 빌려서 해결하곤 했습니다.
+
+구글에 검색해보면 같은 문제를 겪었던 수많은 분들의 글들을 읽을 수 있습니다.
+
+지식을 정리해놓은 글들을 보며 '나도 이렇게 남들에게 설명해줄 수 있는 지식을 가졌으면 좋겠다.'
+'블로그에 잘정리해서 나같은 사람에게 도움이 되었으면 좋겠다!'는 생각을 했습니다.
+
+추가로 블로그의 다른 글들을 읽다보면 개발자로서의 자기개발, 느끼는 회의감, 1년 회고 등의 글들도 읽게 되는데,
+인생 선배의 예전 얘기들을 듣는 느낌, 그런 사람들이 이뤄낸 성과를 보며 저 역시도 그를 기록할 수 있는 창구가 되었으면 했습니다.
+
+추천 글)
+
+[인프런 CEO 이형주님의 블로그](https://www.hyungjoo.me/%ec%9d%b8%ec%a6%9d-%eb%a9%94%ec%9d%bc-%ec%98%a4%eb%a5%98/)  
+[velog를 만드신 velopert님의 블로그](https://velopert.com/3719)
+
+## 블로그 어떻게 만들까?
+
+글을 쓸 수 있는 웹사이트가 존재하고 SEO, 디자인 등 상당 부분을 도와주는 Medium, 네이버, 티스토리, velog 등의 선택지가 있었지만
+그래도 <strong>'웹 개발자니까 자기 블로그는 자기가 만들자!'</strong>라는 생각에 직접 블로그를 빌드하기로 결정했습니다.
+
+<div className="mx-auto" style={{maxWidth: 300}}>
+    <Image
+        layout="responsive"
+        src={"/process-of-making-blog-1/tyson-word.jpeg"}
+        width={562}
+        height={445}
+    />
+</div>
+<p style={{textAlign: "center", marginTop: 4,}}>
+    <s>그럴싸한 계획을 가지고 있다...의지력에게 쳐맞기 전가지는</s>
+</p>
+
+글또 지원을 위해 블로그 주소를 제출해야될 때가 와서야 실제로 코드를 짜기 시작했지만,
+그전까지는 좋은 블로그들을 리스트업하고 블로그에 들어가야할 feature들을 생각했습니다.
+아래는 그 리스트입니다. :)
+
+```
+- 개인 블로그
+1. https://www.daleseo.com 
+2. https://jbee.io
+3. https://taeny.dev/
+4. https://immigration9.github.io/
+5. https://blog.myungseokang.dev/
+6. https://iam.namjun.kim
+7. https://devlog.juntae.kim/
+8. http://milooy.github.io/TIL/
+9. https://blog.crux.cx/
+10. https://www.hyungjoo.me/
+11. http://gyutaehan.me/
+12. https://abruption.github.io/posts/Mac-Remove-Last-login/
+13. https://sujinlee.me/
+14. https://geonlee.tistory.com
+15. https://tobiasahlin.com/blog/curved-path-animations-in-css/
+16. https://www.attejuvonen.fi/
+17. https://www.dionmisic.com/
+18. https://novemberde.github.io/post/2021/04/05/Golang-HACKING/
+19. https://sangwoo-joh.github.io/
+20. https://www.cstrnt.dev/blog/immutability
+21. https://evan-moon.github.io/
+22. https://lamarr.dev/
+23. https://zzsza.github.io/
+24. https://bluayer.com/
+25. https://www.vasanthk.com/#/resume
+26. https://dev-yakuza.posstree.com/ko/django/pre-commit/
+27. https://sunmon.github.io/
+28. https://tech.kakao.com/2019/12/05/make-better-use-of-eslint/
+29. https://blog.outsider.ne.kr/
+30. https://jojoldu.tistory.com/463
+
+- 개인 사이트
+1. https://shiftpsh.com/
+2. https://myungseokang.dev/
+3. https://i-am-seo-sang.vercel.app/
+
+- 회사 블로그
+1. https://spoqa.github.io/
+2. https://blex.me/
+3. https://coffeewhale.com/
+4. https://www.44bits.io/
+5. https://grepp.tistory.com/
+6. http://blog.dramancompany.com
+7. https://blog.sentry.io
+8. https://tech.buzzvil.com/
+9. https://blog.goorm.io/
+
+```
+
+### Features(맨 뒤는 구현 여부)
+
+1. 블로그의 전체 레이아웃은 썸네일, 제목, 요약글이 보이게 ✅
+2. 라이트 모드 / 다크 모드 ✅
+3. 메인컬러 레드 ✅
+4. Markdown으로 글 작성이 가능하도록 ✅
+5. Tag로 분류 ❌
+6. 조회수 ❌
+7. 댓글, 좋아요 작성 가능 ❌
+8. Google Analytics ❌
+9. SEO 최적화 ❌
+
+어떤 프레임워크를 선택했고, 실제 코드는 다음 글에서 공개하겠습니다. :) 
+
