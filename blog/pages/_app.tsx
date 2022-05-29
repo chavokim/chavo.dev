@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <Nav />
         <section className="py-24 width-screen dark:bg-black">
-            <div className="container mx-auto">
+            <div className="xl:max-w-5xl container mx-auto ">
                 <Component {...pageProps} />
             </div>
         </section>
