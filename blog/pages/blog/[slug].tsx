@@ -23,6 +23,7 @@ const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image
                 <title>Chavolog - {title}</title>
                 <meta name="description" content={excerpt} key={"description"} />
                 <meta property="og:title" content={title} key={"og-title"} />
+                <meta property="og:description" content={excerpt} key={"og-description"} />
                 <meta property="og:image" content={image} key={"og-image"} />
             </Head>
             <div className="flex flex-row justify-center px-4 sm:px-0">

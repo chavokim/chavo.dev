@@ -14,7 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <meta name="description" content="Chavo Kim의 이것저것 쓰는 blog" key={"description"}/>
             <meta name="naver-site-verification" content="ffd2270ebd7d5eaafd28a54e52a4afda91a05e1f" />
             <link rel="icon" href="/favicon.ico" />
+            <meta property="og:site_name" content="blog.chavo.dev" key={"og-site-name"} />
             <meta property="og:title" content="Chavolog" key={"og-title"} />
+            <meta property="og:description" content="Chavo Kim의 이것저것 쓰는 blog" key={"og-description"} />
             <meta property="og:type" content="article" key={"og-type"} />
             <meta property="og:image" content="/og_image.png" key={"og-image"} />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
