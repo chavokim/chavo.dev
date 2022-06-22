@@ -21,10 +21,9 @@ const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image
         <>
             <Head>
                 <title>Chavolog - {title}</title>
-                <meta name="description" content={excerpt} />
-                <meta property="og:title" content={title} />
-                <meta property="og:type" content="article" />
-                <meta property="og:image" content={image} />
+                <meta name="description" content={excerpt} key={"description"} />
+                <meta property="og:title" content={title} key={"og-title"} />
+                <meta property="og:image" content={image} key={"og-image"} />
             </Head>
             <div className="flex flex-row justify-center px-4 sm:px-0">
                 <article className={"prose overflow-hidden dark:prose-invert"}>

@@ -11,12 +11,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div>
         <Head>
             <title>Chavolog</title>
-            <meta name="description" content="Chavo Kim's blog" />
+            <meta name="description" content="Chavo Kim의 이것저것 쓰는 blog" key={"description"}/>
             <meta name="naver-site-verification" content="ffd2270ebd7d5eaafd28a54e52a4afda91a05e1f" />
             <link rel="icon" href="/favicon.ico" />
-            <meta property="og:title" content="Chavolog" />
-            <meta property="og:type" content="article" />
-            <meta property="og:image" content="/og_image.png" />
+            <meta property="og:title" content="Chavolog" key={"og-title"} />
+            <meta property="og:type" content="article" key={"og-type"} />
+            <meta property="og:image" content="/og_image.png" key={"og-image"} />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={""} />
             <link
