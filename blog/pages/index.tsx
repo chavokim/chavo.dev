@@ -3,53 +3,17 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import {PostType} from "../common/interfaces/post";
-import PostCard from "../common/components/PostCard";
 import moment from "moment";
-import Link from 'next/link';
+import MainPage, {MainPageTypeProps} from "../common/page/MainPage";
 
-interface HomeTypeProps {
-    posts: PostType[],
-    totalPageNum: number,
-}
-
-const Home: NextPage<HomeTypeProps> = ({ posts, totalPageNum, }) => {
-  return (
-    <div className='flex flex-col'>
-        <div className="flex flex-row justify-center">
-            <div className="grow-0 shrink-0 basis-10/12 flex flex-wrap flex-row">
-            {posts.map((post, index) => (
-                <PostCard post={post} key={index} isFirst={!index} />
-            ))}
-            </div>
-        </div>
-        <div className='mt-4'>
-            <div className='flex flex-row justify-center items-center space-x-1'>
-                {
-                    ([...new Array(totalPageNum)]).map((_, i) => (
-                        <Link passHref href={`/page/${i+1}`} key={`pageitem-${i}`}>
-                            <div 
-                                className={`h-12 w-12 flex flex-row justify-center items-center dark:text-white
-                                cursor-pointer hover:bg-red hover:text-white rounded-lg dark:hover:text-black font-bold
-                                ${!i ? "bg-red text-white dark:text-black" : ""}
-                                `}
-                            >
-                                {i + 1}
-                            </div>
-                        </Link>
-                    ))
-                }
-                { (totalPageNum > 1) ? (<Link passHref href={`/page/2`}>
-                    <div 
-                        className='h-12 w-12 flex flex-row justify-center items-center dark:text-white
-                        cursor-pointer hover:bg-red hover:text-white rounded-lg dark:hover:text-black font-bold'
-                    >
-                        &gt;
-                    </div>
-                </Link>) : null}
-            </div>
-        </div>
-    </div>
-  )
+const Home: NextPage<MainPageTypeProps> = ({ posts, totalPageNum }) => {
+    return (
+        <MainPage
+            posts={posts}
+            pageNum={1}
+            totalPageNum={totalPageNum}
+        />
+    )
 }
 
 export default Home
