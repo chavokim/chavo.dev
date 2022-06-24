@@ -10,13 +10,17 @@ import React from "react";
 import moment from "moment";
 import Image from "next/image";
 import remarkGfm from "remark-gfm";
+import DisqusComments from "../../common/components/DisqusComments";
 
 interface PostPageTypeProps {
     frontMatter: FrontMatterType,
-    mdxSource: MDXRemoteSerializeResult
+    mdxSource: MDXRemoteSerializeResult,
+    slug: string,
 }
 
-const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image, excerpt}, mdxSource}) => {
+const PostPage: NextPage<PostPageTypeProps> = ({frontMatter, mdxSource, slug}) => {
+    const {title, date, image, excerpt} = frontMatter; 
+    
     return (
         <>
             <Head>
@@ -26,7 +30,7 @@ const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image
                 <meta property="og:description" content={excerpt} key={"og-description"} />
                 <meta property="og:image" content={image} key={"og-image"} />
             </Head>
-            <div className="flex flex-row justify-center px-4 sm:px-0">
+            <div className="flex flex-col items-center px-4 sm:px-0">
                 <article className={"prose overflow-hidden dark:prose-invert"}>
                     <div className="flex flex-col items-center">
                         <h1>{title}</h1>
@@ -44,6 +48,14 @@ const PostPage: NextPage<PostPageTypeProps> = ({frontMatter: {title, date, image
                     </div>
                     <MDXRemote {...mdxSource} components={{ Image }} />
                 </article>
+                <div
+                    className="mt-24 w-full"
+                >
+                    <DisqusComments
+                        frontMatter={frontMatter}
+                        slug={slug}
+                    />
+                </div>
             </div>
         </>
     )
