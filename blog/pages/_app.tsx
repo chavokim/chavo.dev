@@ -43,23 +43,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Script
             id="gtag-script"
             strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=G-33PFC5KLH1`}
+            src={`https://www.googletagmanager.com/gtag/js?id=G-1DMF5XVR4Z`}
         />
         <Script
             strategy="afterInteractive"
             id="gtag-script2"
             dangerouslySetInnerHTML={{
                 __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                
-                  gtag('config', 'G-33PFC5KLH1');
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-1DMF5XVR4Z');
             `,
             }}
-        />
-        <Script 
-            src="https://apis.google.com/js/client:platform.js"
         />
         <Nav />
         <section className="py-24 width-screen dark:bg-black">

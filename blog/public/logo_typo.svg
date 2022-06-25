@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2203 700">
+    <defs>
+        <style>
+            .cls-1,.cls-2,.cls-3{
+            fill:none;stroke:#d50606;stroke-linecap:round;stroke-miterlimit:10;}.cls-1{stroke-width:50px;}.cls-2{stroke-width:60px;}.cls-3{stroke-width:80px;}
+            .cls-4{
+                font-size:400px;
+                fill:#d50606;
+                font-family:Futura-Medium,Futura,"Red Hat Text",sans-serif;
+                font-weight:500;
+            }
+            .cls-5{letter-spacing:0.02em;}.cls-6{letter-spacing:-0.06em;}.cls-7{letter-spacing:-0.03em;}
+            .cls-2{animation: pulse2 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;}
+            .cls-3{animation: pulse2 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; animation-delay: 250ms;}
+            @keyframes pulse2 {
+            0%, 100% {
+                    opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            }
+        </style>
+    </defs>
+    <g id="Typo_white" data-name="Typo white">
+        <line class="cls-1" x1="47.4" y1="348.67" x2="496.7" y2="608.08"/>
+        <line class="cls-1" x1="496.67" y1="88.58" x2="47.4" y2="348.67"/>
+        <line class="cls-2" x1="270.95" y1="294.31" x2="270.95" y2="398.31"/>
+        <line class="cls-3" x1="405.37" y1="245.84" x2="405.37" y2="448.84"/>
+        <text class="cls-4" transform="translate(635.79 496.25)">
+            <tspan class="cls-5">C</tspan>
+            <tspan x="288.67" y="0">H</tspan>
+            <tspan class="cls-6" x="582.03" y="0">A</tspan>
+            <tspan class="cls-7" x="854.69" y="0">V</tspan>
+            <tspan x="1111.91" y="0">O</tspan>
+        </text>
+    </g>
+</svg>

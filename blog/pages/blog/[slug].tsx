@@ -69,7 +69,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             slug: filename.replace(".mdx", "")
         }
     }));
-    
+
     return ({
         paths,
         fallback: false,
