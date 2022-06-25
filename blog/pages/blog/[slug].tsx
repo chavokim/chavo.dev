@@ -31,7 +31,7 @@ const PostPage: NextPage<PostPageTypeProps> = ({frontMatter, mdxSource, slug}) =
                 <meta property="og:image" content={image} key={"og-image"} />
             </Head>
             <div className="flex flex-col items-center px-4 sm:px-0">
-                <article className={"prose overflow-hidden dark:prose-invert"}>
+                <article className={"prose overflow-hidden dark:prose-invert w-full"}>
                     <div className="flex flex-col items-center">
                         <h1>{title}</h1>
                         <p className="m-0 font-normal text-gray-500 mb-12">
