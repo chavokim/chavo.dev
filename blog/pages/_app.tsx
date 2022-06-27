@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Script
             id="gtag-script"
             strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=G-1DMF5XVR4Z`}
+            src={`https://www.googletagmanager.com/gtag/js?id=G-WEX7MSVGGW`}
         />
         <Script
             strategy="afterInteractive"
@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', 'G-1DMF5XVR4Z');
+                gtag('config', 'G-WEX7MSVGGW');
             `,
             }}
         />
