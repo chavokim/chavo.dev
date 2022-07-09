@@ -10,9 +10,8 @@ import LogoIcon from "../../public/logo_typo.svg"
 import {createPopper} from "@popperjs/core";
 
 const TAB_ITEMS = [
-    {label: "Dev", href: "/?activeName=dev", value: "dev",},
-    {label: "Books", href: "/?activeName=books", value: "books"},
-    {label: "Diary", href: "/?activeName=diary", value: "diary",},
+    {label: "About", href: "https://chavo.dev", value: "about",},
+    {label: "Blog", href: "/", value: "blog"},
 ]
 
 const DisplayThemeType = {
