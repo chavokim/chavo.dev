@@ -19,7 +19,7 @@ interface PostPageTypeProps {
 }
 
 const PostPage: NextPage<PostPageTypeProps> = ({frontMatter, mdxSource, slug}) => {
-    const {title, date, image, excerpt} = frontMatter; 
+    const {title, date, image, excerpt} = frontMatter;
     
     return (
         <>

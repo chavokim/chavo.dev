@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 crossOrigin={""}
                 href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
             />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css"/>
         </Head>
         <Script
             id="gtag-script"
